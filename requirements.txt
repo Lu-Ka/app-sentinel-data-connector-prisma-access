@@ -1,0 +1,6 @@
+requests
+Flask
+gunicorn[gevent]
+gevent
+azure-identity
+azure-monitor-ingestion
