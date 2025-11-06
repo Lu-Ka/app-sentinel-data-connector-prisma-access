@@ -19,6 +19,7 @@ SUCCESS_RESPONSE = json.dumps({"success": True})
 
 
 MAPPING = json.load(open("mapping.json"))
+CEF_KEYS = {"DeviceVendor": "Palo Alto Networks", "DeviceProduct": "Prisma Access"}
 CUSTOM_MAPPING = {
     "Rule": "DeviceCustomString1",
     "URLCategory": "DeviceCustomString2",
@@ -27,7 +28,6 @@ CUSTOM_MAPPING = {
     "ThreatCategory": "DeviceCustomString5",
     "DirectionOfAttack": "DeviceCustomString6",
 }
-
 
 ENV = ("DCE_URL", "DCR_ID", "DCR_STREAM")
 
@@ -72,6 +72,8 @@ def remap_log(log):
 
     if additional_extensions:
         new_log["AdditionalExtensions"] = ";".join(additional_extensions)
+
+    new_log = {**new_log, **CEF_KEYS}
 
     return new_log
 
